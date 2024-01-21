@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import pokemonData from '../assets/data.json';
 import { PokemonComponentComponent } from './pokemon-component/pokemon-component.component';
+import { PokemonService } from './service/pokemon.service';
+import { Pokemon } from './model/pokemon.model';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,15 @@ import { PokemonComponentComponent } from './pokemon-component/pokemon-component
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent{
+export class AppComponent implements OnInit{
   title = 'angular-learning-project';
-  pokemonList: any[] = pokemonData;
+  pokemonList: Pokemon[];
+
+  constructor(private pokemonService: PokemonService){}
+
+  ngOnInit() {
+    this.pokemonList = this.pokemonService.getPokedex();
+  }
+  
 
 }
