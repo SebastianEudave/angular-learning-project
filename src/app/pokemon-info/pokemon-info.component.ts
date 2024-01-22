@@ -1,24 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule, ActivatedRoute} from '@angular/router';
+import { RouterModule, ActivatedRoute, Router, ParamMap} from '@angular/router';
 import { PokemonService } from '../service/pokemon.service';
 import { Pokemon } from '../model/pokemon.model';
+import { Observable, switchMap } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { CustomNumberPipe } from '../pipe/custom-number.pipe';
 
 @Component({
   selector: 'app-pokemon-info',
   standalone: true,
-  imports: [ RouterModule ],
+  imports: [ RouterModule, CommonModule, CustomNumberPipe ],
   templateUrl: './pokemon-info.component.html',
   styleUrl: './pokemon-info.component.css'
 })
 export class PokemonInfoComponent implements OnInit {
 
-  pokemon: Pokemon;
+  pokemon$!: Observable<Pokemon>;
 
   constructor(private pokemonService: PokemonService, 
-    private route: ActivatedRoute){}
+    private route: ActivatedRoute, private router: Router){}
 
   ngOnInit(): void {
-    let id = this.route.snapshot.paramMap.get('id');
-    this.pokemon = this.pokemonService.getPokemonInformation(id);
+    this.pokemon$ = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => this.pokemonService.getPokemonInformation(params.get('id')!)));
   }
 }

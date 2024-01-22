@@ -1,26 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { PokemonComponentComponent } from './pokemon-component/pokemon-component.component';
-import { PokemonService } from './service/pokemon.service';
-import { Pokemon } from './model/pokemon.model';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, PokemonComponentComponent],
+  imports: [ RouterOutlet ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
   title = 'angular-learning-project';
-  pokemonList: Pokemon[];
-
-  constructor(private pokemonService: PokemonService){}
-
-  ngOnInit() {
-    this.pokemonList = this.pokemonService.getPokedex();
-  }
-  
 
 }
