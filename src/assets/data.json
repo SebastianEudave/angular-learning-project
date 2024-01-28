@@ -1,34 +1,50 @@
 [
     {
-        "name": "bulbasaur",
-        "id": 1,
-        "forms_switchable": false
+      "name": "bulbasaur",
+      "id": 1,
+      "forms_switchable": false,
+      "weight": 69,
+      "height": 7,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png"
     },
     {
-        "name": "ivysaur",
-        "id": 2,
-        "forms_switchable": false
+      "name": "ivysaur",
+      "id": 2,
+      "forms_switchable": false,
+      "weight": 49,
+      "height": 9,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/2.png"
     },
     {
-        "name": "venusaur",
-        "id": 3,
-        "forms_switchable": true
+      "name": "venusaur",
+      "id": 3,
+      "forms_switchable": true,
+      "weight": 29,
+      "height": 18,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/3.png"
     },
     {
-        "name": "charmander",
-        "id": 4,
-        "forms_switchable": false
+      "name": "charmander",
+      "id": 4,
+      "forms_switchable": false,
+      "weight": 69,
+      "height": 8,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/4.png"
     },
     {
-        "name": "charmeleon",
-        "id": 5,
-        "forms_switchable": false
+      "name": "charmeleon",
+      "id": 5,
+      "forms_switchable": false,
+      "weight": 29,
+      "height": 38,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/5.png"
     },
     {
-        "name": "charizard",
-        "id": 6,
-        "forms_switchable": true
+      "name": "charizard",
+      "id": 6,
+      "forms_switchable": true,
+      "weight": 99,
+      "height": 12,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/6.png"
     }
 ]
-
-  

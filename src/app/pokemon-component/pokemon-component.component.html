@@ -1,6 +1,7 @@
 
-<div class="card">
+<div class="card" [routerLink]="['/pokemon', pokemon.id]" routerLinkActive="active" >
     <div class="card-body">
+        <h5 class="card-title">No. {{pokemon.id}}</h5>
         <h4 class="card-title">{{pokemon.name}}</h4>
         <p class="card-text" *ngIf="pokemon.forms_switchable">Switchable</p>
         <p class="card-text" *ngIf="!pokemon.forms_switchable">Not Switchable</p>
