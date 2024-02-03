@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Pokedex } from '../model/pokedex.model';
 
 @Component({
   selector: 'app-pokemon-component',
@@ -11,6 +12,7 @@ import { RouterModule } from '@angular/router';
 })
 export class PokemonComponentComponent {
 
-  @Input() pokemon!: any;
+  @Input() pokemon!: Pokedex;
+  @Output() selectedUrl: EventEmitter<string> = new EventEmitter<string>();
 
 }

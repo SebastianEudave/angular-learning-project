@@ -1,8 +1,8 @@
-<div *ngIf="pokemon$ | async as pokemon">
-    <h4>{{pokemon.name | uppercase}}</h4>
-    <img [src]="pokemon.sprite" alt="">
+<div *ngIf="pokemon$">
+    <h4>{{pokemon$.name | uppercase}}</h4>
+    <!-- <img [src]="pokemon.sprite" alt="">
     <p>No. {{pokemon.id}}</p>
     <p>Weight : {{pokemon.weight | customNumber : "dm"}}</p>
-    <p>Height : {{pokemon.height | customNumber : "hg"}}</p>
+    <p>Height : {{pokemon.height | customNumber : "hg"}}</p> -->
 </div>
-<button class="btn btn-primary" routerLink="" routerLinkActive="active">Back to Pokedex</button>
+<button class="btn btn-primary" (click)="hidePokemonInfo()">Back to Pokedex</button>
