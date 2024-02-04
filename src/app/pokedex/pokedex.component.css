@@ -1,0 +1,7 @@
+.card:hover {
+    background-color: whitesmoke; /* Background color on hover */
+}
+
+.card {
+    background-color: white;
+}

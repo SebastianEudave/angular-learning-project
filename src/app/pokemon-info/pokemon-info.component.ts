@@ -18,16 +18,16 @@ export class PokemonInfoComponent implements OnInit {
 
   @Input() pokemonUrl!: string;
   @Output() pokemonDetailNotActive = new EventEmitter<boolean>();
-  pokemon$!: Pokemon;
+  pokemon!: Pokemon;
 
-  constructor(private pokemonService: PokemonService, 
+  constructor(private pokemonService: PokemonService,
     private route: ActivatedRoute, private router: Router){}
 
   ngOnInit(): void {
     this.pokemonService.getPokemonInformation(this.pokemonUrl).subscribe(
       (results: Pokemon) => {
         console.log(results);
-        this.pokemon$ = results;
+        this.pokemon = results;
       }
     )
   }

@@ -1,8 +1,9 @@
-<div *ngIf="pokemon$">
-    <h4>{{pokemon$.name | uppercase}}</h4>
-    <!-- <img [src]="pokemon.sprite" alt="">
+<div class="ms-4" *ngIf="pokemon">
+    <h4>{{pokemon.name | uppercase}}</h4>
+    <img [src]="pokemon.sprites['front_default']" alt="">
     <p>No. {{pokemon.id}}</p>
     <p>Weight : {{pokemon.weight | customNumber : "dm"}}</p>
-    <p>Height : {{pokemon.height | customNumber : "hg"}}</p> -->
+    <p>Height : {{pokemon.height | customNumber : "hg"}}</p>
+    <button class="btn btn-primary" (click)="hidePokemonInfo()">Back to Pokedex</button>
 </div>
-<button class="btn btn-primary" (click)="hidePokemonInfo()">Back to Pokedex</button>
+
