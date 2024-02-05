@@ -1,3 +1,12 @@
-<div class="card-group">
-    <app-pokemon-component *ngFor="let pokemon of pokemonList$ | async" [pokemon] = "pokemon"></app-pokemon-component>
+<h1 class="m-2 d-flex justify-content-center">POKEDEX</h1>
+<div class="row row-cols-1 row-cols-md-5 g-4 ms-2 me-2" *ngIf="!pokemonDetailActive">
+    <div class="col" *ngFor="let pokemon of pokemonList; let i = index">
+        <div class="card" (click)="setPokemonDetailTrue(pokemon.url)">
+            <div class="card-body">
+                <h5 class="card-title">No. {{i+1}}</h5>
+                <h5 class="card-title">{{pokemon.name | uppercase}}</h5>
+            </div>
+        </div>
+    </div>
 </div>
+<app-pokemon-info *ngIf="pokemonDetailActive" [pokemonUrl]="selectedPokemonUrl" (pokemonDetailNotActive)="pokemonDetailActive = $event"></app-pokemon-info>

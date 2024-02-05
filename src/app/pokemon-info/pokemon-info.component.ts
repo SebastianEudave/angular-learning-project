@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RouterModule, ActivatedRoute, Router, ParamMap} from '@angular/router';
 import { PokemonService } from '../service/pokemon.service';
 import { Pokemon } from '../model/pokemon.model';
 import { Observable, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { CustomNumberPipe } from '../pipe/custom-number.pipe';
+import { Pokedex } from '../model/pokedex.model';
 
 @Component({
   selector: 'app-pokemon-info',
@@ -15,13 +16,23 @@ import { CustomNumberPipe } from '../pipe/custom-number.pipe';
 })
 export class PokemonInfoComponent implements OnInit {
 
-  pokemon$!: Observable<Pokemon>;
+  @Input() pokemonUrl!: string;
+  @Output() pokemonDetailNotActive = new EventEmitter<boolean>();
+  pokemon!: Pokemon;
 
-  constructor(private pokemonService: PokemonService, 
+  constructor(private pokemonService: PokemonService,
     private route: ActivatedRoute, private router: Router){}
 
   ngOnInit(): void {
-    this.pokemon$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => this.pokemonService.getPokemonInformation(params.get('id')!)));
+    this.pokemonService.getPokemonInformation(this.pokemonUrl).subscribe(
+      (results: Pokemon) => {
+        console.log(results);
+        this.pokemon = results;
+      }
+    )
+  }
+
+  hidePokemonInfo() {
+    this.pokemonDetailNotActive.emit(false);
   }
 }

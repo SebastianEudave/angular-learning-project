@@ -2,23 +2,21 @@ import { Injectable } from '@angular/core';
 import { Pokemon } from '../model/pokemon.model';
 import pokemonData from '../../assets/data.json';
 import { Observable, map, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Pokedex } from '../model/pokedex.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PokemonService {
-  
-  pokemonList: Pokemon[] = pokemonData;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getPokedex (): Observable<Pokemon[]> {
-    return of(this.pokemonList);
+  getPokedex (): Observable<Pokedex[]> {
+    return this.http.get<Pokedex[]>("https://pokeapi.co/api/v2/pokemon");
   }
 
-  getPokemonInformation (id: string): Observable<Pokemon> {
-    return this.getPokedex().pipe(
-      map((pokemonList: Pokemon[]) => pokemonList.find(pokemon => pokemon.id === +id)!)
-    );
+  getPokemonInformation (pokemonUrl: string): Observable<Pokemon> {
+    return this.http.get<Pokemon>(pokemonUrl);
   }
 }
