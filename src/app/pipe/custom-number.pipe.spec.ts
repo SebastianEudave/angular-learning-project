@@ -1,8 +1,8 @@
 import { CustomNumberPipe } from './custom-number.pipe';
 
 describe('CustomNumberPipe', () => {
-  it('create an instance', () => {
+  it('Should transform number to detailed value', () => {
     const pipe = new CustomNumberPipe();
-    expect(pipe).toBeTruthy();
+    expect(pipe.transform(1, 'hg')).toBe("1 hg");
   });
 });
