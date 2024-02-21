@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
-import { TokenStorageService } from './service/token-storage.service';
+import { LoginService } from './service/login.service';
 
 @Component({
   selector: 'app-root',
@@ -10,20 +10,25 @@ import { TokenStorageService } from './service/token-storage.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, OnDestroy{
 
   title = 'angular-learning-project';
-  isAuthenticated: boolean;
+  $isAuthenticated: boolean;
+  susbcription: any;
 
-  constructor(private tokenStorage: TokenStorageService, private router: Router){}
+  constructor(private loginService: LoginService, private router: Router){}
 
   ngOnInit(): void {
-    this.isAuthenticated = !!this.tokenStorage.getToken();
+    this.susbcription = this.loginService.isLoggedIn.subscribe(value =>
+      this.$isAuthenticated = value);
+  }
+
+  ngOnDestroy(): void {
+      this.susbcription.unsuscribe();
   }
 
   logout(): void {
-    this.tokenStorage.signOut();
-    window.location.reload();
+    this.loginService.signOut();
     this.router.navigate(['/login']);
   }
 }
