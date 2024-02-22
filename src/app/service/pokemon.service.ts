@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Pokemon } from '../model/pokemon.model';
-import pokemonData from '../../assets/data.json';
-import { Observable, map, of } from 'rxjs';
+import { Observable, concatMap, from, map, mergeMap, of, pluck, switchMap, tap } from 'rxjs';
+import { fromFetch } from 'rxjs/fetch';
 import { HttpClient } from '@angular/common/http';
 import { Pokedex } from '../model/pokedex.model';
 

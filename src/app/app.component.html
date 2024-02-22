@@ -8,8 +8,8 @@
             <a class="nav-link" routerLink="/pokedex" routerLinkActive="router-link-active">Pokedex</a>
           </li>
         </ul>
-        <button class="btn btn-danger" *ngIf="isAuthenticated" (click)="logout()">Logout</button>
-        <button class="btn btn-success" *ngIf="!isAuthenticated" routerLink="/login" routerLinkActive="router-link-active">Login</button>
+        <button class="btn btn-danger" *ngIf="isLoggedIn | async" (click)="logout()">Logout</button>
+        <button class="btn btn-success" *ngIf="!(isLoggedIn | async)" routerLink="/login" routerLinkActive="router-link-active">Login</button>
     </div>
 </nav>
 <router-outlet></router-outlet>

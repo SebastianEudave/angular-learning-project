@@ -1,23 +1,31 @@
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
-import { TokenStorageService } from './token-storage.service';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  isAuthenticated: boolean = false;
+  public loginObservable : Observable<boolean>;
+  private loginSubject: BehaviorSubject<boolean>;
 
-  constructor(private router: Router, private tokenStorage: TokenStorageService) { }
+  constructor(private router: Router) {
+    this.loginSubject = new BehaviorSubject<boolean>(false);
+    this.loginObservable = this.loginSubject.asObservable();
+  }
 
-  login(username: string, password: string):string{
-    this.isAuthenticated = true;
-    return "token";
+  signOut(): void {
+    this.loginSubject.next(false);
+  }
+
+  login(username: string, password: string):void{
+    this.loginSubject.next(true);
+    this.router.navigate(['/home']);
   }
 
   canActivate(): boolean {
-    if(this.tokenStorage.getToken() === null){
+    if(this.loginSubject.getValue() === false){
       this.router.navigate(['/login']);
       return false;
     }
