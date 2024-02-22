@@ -1,33 +1,31 @@
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  private isAuthenticated : boolean;
-  public isLoggedIn: Subject<boolean>;
+  public loginObservable : Observable<boolean>;
+  private loginSubject: BehaviorSubject<boolean>;
 
   constructor(private router: Router) {
-    this.isLoggedIn = new Subject<boolean>();
-    this.isAuthenticated = false;
+    this.loginSubject = new BehaviorSubject<boolean>(false);
+    this.loginObservable = this.loginSubject.asObservable();
   }
 
   signOut(): void {
-    this.isAuthenticated = false;
-    this.isLoggedIn.next(false);
+    this.loginSubject.next(false);
   }
 
   login(username: string, password: string):void{
-    this.isLoggedIn.next(true);
-    this.isAuthenticated = true;
+    this.loginSubject.next(true);
     this.router.navigate(['/home']);
   }
 
   canActivate(): boolean {
-    if(this.isAuthenticated === false){
+    if(this.loginSubject.getValue() === false){
       this.router.navigate(['/login']);
       return false;
     }

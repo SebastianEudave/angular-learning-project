@@ -1,6 +1,6 @@
 <div class="m-3">
     <div class="form">
-      <form *ngIf="!$isAuthenticated" [formGroup]="userLogin" (ngSubmit)="onSubmit()">
+      <form *ngIf="!(isLoggedIn | async)" [formGroup]="userLogin" (ngSubmit)="onSubmit()">
         <div class="form-group m-1">
           <input id="username" type="text" formControlName="username" placeholder="username">
         </div>
@@ -17,7 +17,7 @@
         </div>
       </form>
 
-      <div class="alert alert-success" *ngIf="$isAuthenticated">
+      <div class="alert alert-success" *ngIf="isLoggedIn | async">
         Logged In.
       </div>
     </div>

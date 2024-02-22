@@ -4,4 +4,5 @@ export interface Pokemon {
     weight: number;
     height: number;
     sprites: any;
+    image: string;
 }

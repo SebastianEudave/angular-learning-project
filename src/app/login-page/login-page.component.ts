@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../service/login.service';
 import { CommonModule } from '@angular/common';
 import { Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login-page',
@@ -10,24 +11,18 @@ import { Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
-export class LoginPageComponent implements OnInit, OnDestroy {
+export class LoginPageComponent implements OnInit {
   userLogin = this.formBuilder.group({
     username: ['', Validators.required],
     password: ['', [Validators.required, Validators.minLength(8)]]
   });
-  $isAuthenticated: boolean;
-  subscription: any;
+  isLoggedIn: Observable<boolean>;
 
   constructor(private loginService: LoginService,
     private formBuilder: FormBuilder){}
 
   ngOnInit(): void {
-    this.subscription = this.loginService.isLoggedIn.subscribe(value =>
-      this.$isAuthenticated = value);
-  }
-
-  ngOnDestroy(): void {
-      this.subscription.unsuscribe();
+    this.isLoggedIn = this.loginService.loginObservable;
   }
 
   onSubmit(): void {

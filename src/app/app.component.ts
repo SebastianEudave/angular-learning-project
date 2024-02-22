@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { LoginService } from './service/login.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,21 +11,15 @@ import { LoginService } from './service/login.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit, OnDestroy{
+export class AppComponent implements OnInit{
 
   title = 'angular-learning-project';
-  $isAuthenticated: boolean;
-  susbcription: any;
+  isLoggedIn: Observable<boolean>;
 
   constructor(private loginService: LoginService, private router: Router){}
 
   ngOnInit(): void {
-    this.susbcription = this.loginService.isLoggedIn.subscribe(value =>
-      this.$isAuthenticated = value);
-  }
-
-  ngOnDestroy(): void {
-      this.susbcription.unsuscribe();
+    this.isLoggedIn = this.loginService.loginObservable;
   }
 
   logout(): void {

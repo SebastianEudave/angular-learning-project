@@ -21,17 +21,16 @@ export class PokedexComponent implements OnInit {
   constructor(private pokemonService: PokemonService,
     private route: ActivatedRoute){
       this.pokemonDetailActive = false;
-    }
+  }
 
   ngOnInit() {
     this.pokemonService.getPokedex().subscribe(
       (results: any) => {
-        console.log(results);
         for(let p of results.results) {
           this.pokemonList.push(p)
         }
       }
-    )
+    );
   }
 
   setPokemonDetailTrue(pokemonUrl: string): void{
