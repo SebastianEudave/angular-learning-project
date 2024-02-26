@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PokemonInfoComponent } from './pokemon-info.component';
+import { PokemonService } from '../service/pokemon.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 describe('PokemonInfoComponent', () => {
   let component: PokemonInfoComponent;
@@ -8,7 +10,10 @@ describe('PokemonInfoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PokemonInfoComponent]
+      imports: [PokemonInfoComponent],
+      providers: [{ provide: PokemonService, useValue: true },
+        { provide: ActivatedRoute, useValue: true },
+        { provide: Router, useValue: true }]
     })
     .compileComponents();
     

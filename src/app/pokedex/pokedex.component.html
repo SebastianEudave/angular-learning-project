@@ -1,12 +1,18 @@
 <h1 class="m-2 d-flex justify-content-center">POKEDEX</h1>
-<div class="row row-cols-1 row-cols-md-5 g-4 ms-2 me-2" *ngIf="!pokemonDetailActive">
-    <div class="col" *ngFor="let pokemon of pokemonList; let i = index">
-        <div class="card" (click)="setPokemonDetailTrue(pokemon.url)">
-            <div class="card-body">
-                <h5 class="card-title">No. {{i+1}}</h5>
-                <h5 class="card-title">{{pokemon.name | uppercase}}</h5>
+<div class="row row-cols-1 row-cols-md-6 g-4 ms-2 me-2" *ngIf="!pokemonDetailActive">
+    <ng-container *ngIf="pokemonList">
+        <div class="col" *ngFor="let pokemon of pokemonList; let i = index">
+            <div class="card w-75 border-warning" (click)="setPokemonDetailTrue(pokemon.id)">
+                <img [src]="pokemon.image" class="img-fluid opacity-50" alt="">
+                <div class="card-img-overlay">
+                    <h5 class="card-title">No. {{i+1}}</h5>
+                    <h5 class="card-title">{{pokemon.name | uppercase}}</h5>
+                </div>
             </div>
         </div>
-    </div>
+    </ng-container>
+    <ng-container *ngIf="pokemonList.length === 0">
+        <h3>Loading...</h3>
+    </ng-container>
 </div>
-<app-pokemon-info *ngIf="pokemonDetailActive" [pokemonUrl]="selectedPokemonUrl" (pokemonDetailNotActive)="pokemonDetailActive = $event"></app-pokemon-info>
+<app-pokemon-info *ngIf="pokemonDetailActive" [pokemon]="selectedPokemon" (pokemonDetailNotActive)="pokemonDetailActive = $event"></app-pokemon-info>

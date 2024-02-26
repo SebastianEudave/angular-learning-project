@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { PokemonService } from '../service/pokemon.service';
 import { CommonModule } from '@angular/common';
-import { Pokedex } from '../model/pokedex.model';
 import { PokemonInfoComponent } from '../pokemon-info/pokemon-info.component';
+import { Pokemon } from '../model/pokemon.model';
 
 @Component({
   selector: 'app-pokedex',
@@ -14,27 +13,22 @@ import { PokemonInfoComponent } from '../pokemon-info/pokemon-info.component';
 })
 export class PokedexComponent implements OnInit {
 
-  pokemonList: Pokedex[] = [];
+  pokemonList: Pokemon[] = [];
   pokemonDetailActive: boolean;
-  selectedPokemonUrl: string;
+  selectedPokemon: Pokemon;
 
-  constructor(private pokemonService: PokemonService,
-    private route: ActivatedRoute){
+  constructor(private pokemonService: PokemonService){
       this.pokemonDetailActive = false;
   }
 
   ngOnInit() {
     this.pokemonService.getPokedex().subscribe(
-      (results: any) => {
-        for(let p of results.results) {
-          this.pokemonList.push(p)
-        }
-      }
+      (results: Pokemon[]) => this.pokemonList = results
     );
   }
 
-  setPokemonDetailTrue(pokemonUrl: string): void{
-    this.selectedPokemonUrl = pokemonUrl;
+  setPokemonDetailTrue(pokemon: number): void{
+    this.selectedPokemon = this.pokemonList[pokemon - 1];
     this.pokemonDetailActive = true;
   }
 }

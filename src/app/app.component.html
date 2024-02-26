@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm bg-light">
+<nav class="navbar navbar-expand-sm navbar-dark bg-danger border-bottom border-dark">
     <div class="container-fluid">
         <ul class="navbar-nav">
           <li class="nav-item">
@@ -8,8 +8,8 @@
             <a class="nav-link" routerLink="/pokedex" routerLinkActive="router-link-active">Pokedex</a>
           </li>
         </ul>
-        <button class="btn btn-danger" *ngIf="isLoggedIn | async" (click)="logout()">Logout</button>
-        <button class="btn btn-success" *ngIf="!(isLoggedIn | async)" routerLink="/login" routerLinkActive="router-link-active">Login</button>
+        <button class="btn btn-light" *ngIf="isLoggedIn | async" (click)="logout()">Logout</button>
+        <button class="btn btn-light" *ngIf="!(isLoggedIn | async)" routerLink="/login" routerLinkActive="router-link-active">Login</button>
     </div>
 </nav>
 <router-outlet></router-outlet>
